@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SearchAyah from "../components/search.ayah.component";
-import Loader from "../components/loader.component";
 
 import Pagination from "react-js-pagination";
 
@@ -36,16 +35,10 @@ const Search = ({ query, t }) => {
       });
   };
 
-  if (empty < 2) {
+  if (empty === 1) {
     return (
       <div className="col-sm-12 text-center">
-        {empty === 1 ? (
-          <div className="col-sm-12 alert alert-danger">
-            Kəlmə tapılmamışdır
-          </div>
-        ) : (
-          <Loader />
-        )}
+        <div className="col-sm-12 alert alert-danger">Kəlmə tapılmamışdır</div>
       </div>
     );
   }

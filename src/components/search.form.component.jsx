@@ -4,11 +4,13 @@ import { Form } from "react-bootstrap";
 import translatorList from "../assets/translatorList.js";
 import soorahList from "../assets/soorahList.js";
 
-const SearchForm = ({ onSubmit, formData }) => {
+const DEFAULT_TRANSLATOR = process.env.REACT_APP_DEFAULT_TRANSLATOR;
+
+const SearchForm = ({ onSubmit, formData = {} }) => {
   const [form, setForm] = useState({
     s: 0,
     a: "",
-    t: 1,
+    t: DEFAULT_TRANSLATOR,
     q: "",
     view: "empty",
     ...formData,

@@ -32,7 +32,7 @@ const PrayerWidget = () => {
     <table className="table table-borderless table-sm">
       <thead className="table-dark">
         <tr>
-          <td align="center" colSpan="2">
+          <td align="center" colSpan={2}>
             {hijri}
           </td>
           <td align="center">Bakı</td>

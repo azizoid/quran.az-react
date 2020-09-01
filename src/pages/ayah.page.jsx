@@ -4,8 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import TranslatorList from "../components/translator.list.component";
 import ColoredText from "../components/colored.text.component";
 
-import Skeleton from "react-loading-skeleton";
-
 import TitleComponent from "../components/title.component";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -49,21 +47,11 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
 
   let description = "";
 
-  if (empty < 2)
+  if (empty === 1) {
     return (
-      <div className="col-sm-12">
-        {empty === 1 ? (
-          <div className="col-sm-12 alert alert-danger">Ayə tapılmamışdır</div>
-        ) : (
-          <>
-            <h1>
-              <Skeleton height={2} />
-            </h1>
-            <Skeleton count={10} />
-          </>
-        )}
-      </div>
+      <div className="col-sm-12 alert alert-danger">Ayə tapılmamışdır</div>
     );
+  }
 
   return (
     <div className="row">

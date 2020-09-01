@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import SoorahAyah from "../components/soorah.ayah.component";
 import TranslatorList from "../components/translator.list.component";
-import Loader from "../components/loader.component";
 import TitleComponent from "../components/title.component";
 
 const Soorah = ({ soorah, t, soorahTitle }) => {
@@ -28,14 +27,10 @@ const Soorah = ({ soorah, t, soorahTitle }) => {
       });
   }, [soorah, t]);
 
-  if (empty < 2) {
+  if (empty === 1) {
     return (
       <div className="col-sm-12 text-center">
-        {empty === 1 ? (
-          <div className="col-sm-12 alert alert-danger">Surə tapılmamışdır</div>
-        ) : (
-          <Loader />
-        )}
+        <div className="col-sm-12 alert alert-danger">Surə tapılmamışdır</div>
       </div>
     );
   }
