@@ -1,5 +1,7 @@
 import React from "react";
-import { FacebookProvider, Page } from "react-facebook";
+// import { FacebookProvider, Page } from "react-facebook";
+import FacebookProvider from "react-facebook/dist/FacebookProvider";
+import Page from "react-facebook/dist/Page";
 
 const FacebookPage = () => {
   return (

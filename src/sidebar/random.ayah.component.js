@@ -15,7 +15,7 @@ const RandomAyah = () => {
   const soorahList = SOORAH_LIST;
 
   useEffect(() => {
-    fetch("https://quran.az/api/random?t=1")
+    fetch("https://quran.az/api/random?t=4")
       .then((response) => response.json())
       .then((data) => {
         setOut(data.out);

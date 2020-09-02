@@ -2,17 +2,12 @@ import React, { Suspense, lazy } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 
 import Form from "./components/search.form.component";
-
 import Loader from "./components/loader.component";
-
-// import Empty from "./pages/empty.page";
-// import Soorah from "./pages/soorah.page";
-// import Ayah from "./pages/ayah.page";
-// import Search from "./pages/search.page";
 
 import soorahList from "./assets/soorahList.js";
 const DEFAULT_TRANSLATOR = process.env.REACT_APP_DEFAULT_TRANSLATOR;
 
+// const Form = lazy(() => import("./components/search.form.component"));
 const Empty = lazy(() => import("./pages/empty.page"));
 const Soorah = lazy(() => import("./pages/soorah.page"));
 const Ayah = lazy(() => import("./pages/ayah.page"));
@@ -20,9 +15,6 @@ const Search = lazy(() => import("./pages/search.page"));
 
 const App = () => {
   let paramQuery = new URLSearchParams(useLocation().search);
-
-  // let t = paramQuery.get("t") || DEFAULT_TRANSLATOR;
-  // if (![1, 2, 3, 4].includes(t)) t = DEFAULT_TRANSLATOR;
 
   let history = useHistory();
 

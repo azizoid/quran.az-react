@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getDayOfYear } from "date-fns";
+import getDayOfYear from "date-fns/getDayOfYear";
 
 const PrayerWidget = () => {
   const [prayers, setPrayers] = useState([

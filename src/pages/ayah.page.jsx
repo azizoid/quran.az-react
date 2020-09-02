@@ -5,7 +5,12 @@ import TranslatorList from "../components/translator.list.component";
 import ColoredText from "../components/colored.text.component";
 
 import TitleComponent from "../components/title.component";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+// import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {
+  MdNavigateBefore as FaChevronLeft,
+  MdNavigateNext as FaChevronRight,
+} from "react-icons/md";
 
 const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
   let history = useHistory();
