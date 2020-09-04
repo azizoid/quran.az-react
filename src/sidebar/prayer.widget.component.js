@@ -3,12 +3,12 @@ import getDayOfYear from "date-fns/getDayOfYear";
 
 const PrayerWidget = () => {
   const [prayers, setPrayers] = useState([
-    { id: 1, title: "Fəcr namazı", time: "--:--" },
+    { id: 1, title: "Fəcr", time: "--:--" },
     { id: 2, title: "Günəş", time: "--:--" },
-    { id: 3, title: "Zöhr namazı", time: "--:--" },
-    { id: 4, title: "Əsr namazı", time: "--:--" },
-    { id: 5, title: "Məğrib namazı", time: "--:--" },
-    { id: 6, title: "İşa namazı", time: "--:--" },
+    { id: 3, title: "Zöhr", time: "--:--" },
+    { id: 4, title: "Əsr", time: "--:--" },
+    { id: 5, title: "Məğrib", time: "--:--" },
+    { id: 6, title: "İşa", time: "--:--" },
   ]);
   // const [tarix, setTarix] = useState();
   const [hijri, setHijri] = useState();
