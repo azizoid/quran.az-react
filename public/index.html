@@ -2,31 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/x-icon" href="/img/kuran-logo.svg" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="%PUBLIC_URL%/img/kuran-logo.svg"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#38c172" />
 
     <meta name="description" content="Quran.az - Öz Kitabını Oxu" />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="https://quran.az/img/kuran.jpg" />
+    <meta property="og:image" content="%PUBLIC_URL%/img/kuran.jpg" />
     <meta property="og:description" content="Quran.az - Öz Kitabını Oxu" />
     <meta property="og:title" content="Quran.az - Öz Kitabını Oxu" />
 
     <!-- link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" / -->
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <!-- link rel="manifest" href="%PUBLIC_URL%/manifest.json" / -->
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <!-- link rel="manifest" href="%PUBLIC_URL%/manifest.json" / -->
     <title>Quran.az - Öz Kitabını Oxu</title>
   </head>
   <body>
@@ -41,39 +33,6 @@
           alt="quran.az"
         />&nbsp; Quran.az
       </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a
-              href="http://azerislam.com/index.php?lngs=aze&cats=2"
-              rel="noreferrer"
-              class="nav-link"
-              target="_blank"
-              >Yazılar</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              href="https://www.nam.az"
-              rel="noreferrer"
-              class="nav-link"
-              target="_blank"
-              >Nam.az <span class="badge badge-danger">yeni</span></a
-            >
-          </li>
-        </ul>
-      </div>
     </nav>
 
     <!-- Begin page content -->
@@ -162,10 +121,23 @@
     <div class="clearfix"><br /><br /><br /></div>
     <footer class="footer">
       <nav>
-        <ol class="breadcrumb">
+        <ol class="breadcrumb justify-content-center">
           <li class="breadcrumb-item active">&copy; 2003-2020</li>
           <li class="breadcrumb-item">
             <a href="https://www.quran.az">Quran.az</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a
+              href="http://azerislam.com/index.php?lngs=aze&cats=2"
+              rel="noreferrer"
+              target="_blank"
+              >Azerislam.com</a
+            >
+          </li>
+          <li class="breadcrumb-item">
+            <a href="https://www.nam.az" rel="noreferrer" target="_blank"
+              >Nam.az</a
+            >
           </li>
         </ol>
       </nav>
