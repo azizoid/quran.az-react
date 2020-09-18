@@ -181,4 +181,4 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
   );
 };
 
-export default Ayah;
+export default React.memo(Ayah);
