@@ -7,7 +7,6 @@ import Loader from "./components/loader.component";
 import soorahList from "./assets/soorahList.js";
 const DEFAULT_TRANSLATOR = process.env.REACT_APP_DEFAULT_TRANSLATOR;
 
-// const Form = lazy(() => import("./components/search.form.component"));
 const Empty = lazy(() => import("./pages/empty.page"));
 const Soorah = lazy(() => import("./pages/soorah.page"));
 const Ayah = lazy(() => import("./pages/ayah.page"));
