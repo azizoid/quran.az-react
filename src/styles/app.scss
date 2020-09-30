@@ -5,8 +5,8 @@
 @import "variables";
 
 // Bootstrap
-// @import "~bootstrap/scss/bootstrap";
-@import "bootstrap";
+@import "~bootstrap/scss/bootstrap";
+// @import "bootstrap";
 
 #ornament {
   height: 5em;
@@ -29,11 +29,11 @@
   background-color: #f5f5f5;
 }
 
-#search {
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 0;
-}
+// #search {
+//   padding-left: 0;
+//   padding-right: 0;
+//   padding-bottom: 0;
+// }
 #search table {
   margin-bottom: 0;
 }

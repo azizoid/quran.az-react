@@ -48,77 +48,72 @@ const SearchForm = ({ onSubmit, formData = {} }) => {
   return (
     <Form
       id="search"
-      className="card card-header col-sm-12"
+      className="card card-header col-12"
       acceptCharset="UTF-8"
       onSubmit={onSearch}
     >
-      <table className="table">
-        <thead>
-          <tr>
-            <td className="form-group">
-              <Form.Control
-                as="select"
-                className="form-control"
-                value={form.s}
-                onChange={(e) => onSoorahChange(e.target.value)}
-              >
-                {soorahList.map((soorah, index) => (
-                  <option value={index} key={index}>
-                    {soorah}
-                  </option>
-                ))}
-              </Form.Control>
-            </td>
-            <td className="form-group w-25">
-              <Form.Control
-                type="number"
-                placeholder="Ayə"
-                className="form-control"
-                size={3}
-                maxLength={3}
-                min={1}
-                max={286}
-                step={1}
-                value={form.a}
-                onChange={(e) => onAyahChange(e.target.value)}
-              />
-            </td>
-            <td className="form-group">
-              <Form.Control
-                as="select"
-                className="form-control"
-                id="t"
-                value={form.t}
-                onChange={(e) => onTranslatorChange(e.target.value)}
-              >
-                {translatorList.map((t, index) => (
-                  <option value={index} key={index}>
-                    {t}
-                  </option>
-                ))}
-              </Form.Control>
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colSpan="2">
-              <Form.Control
-                type="text"
-                placeholder="Kəlmə"
-                className="form-control"
-                value={form.q}
-                onChange={(e) => onQueryChange(e.target.value)}
-              />
-            </td>
-            <td>
-              <button className="btn btn-success form-control" type="submit">
-                Axtar
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="form-group row">
+        <div class="input-group-prepend col-4">
+          <Form.Control
+            as="select"
+            className="form-control"
+            value={form.s}
+            onChange={(e) => onSoorahChange(e.target.value)}
+          >
+            {soorahList.map((soorah, index) => (
+              <option value={index} key={index}>
+                {soorah}
+              </option>
+            ))}
+          </Form.Control>
+        </div>
+        <div class="input-group col-3">
+          <Form.Control
+            type="number"
+            placeholder="Ayə"
+            className="form-control "
+            size={3}
+            maxLength={3}
+            min={1}
+            max={286}
+            step={1}
+            value={form.a}
+            onChange={(e) => onAyahChange(e.target.value)}
+          />
+        </div>
+        <div class="input-group-prepend col-5">
+          <Form.Control
+            as="select"
+            className="form-control"
+            id="t"
+            value={form.t}
+            onChange={(e) => onTranslatorChange(e.target.value)}
+          >
+            {translatorList.map((t, index) => (
+              <option value={index} key={index}>
+                {t}
+              </option>
+            ))}
+          </Form.Control>
+        </div>
+      </div>
+
+      <div className="form-group row">
+        <div class="input-group-prepend col-7">
+          <Form.Control
+            type="text"
+            placeholder="Kəlmə"
+            className="form-control"
+            value={form.q}
+            onChange={(e) => onQueryChange(e.target.value)}
+          />
+        </div>
+        <div class="input-group-append col-5">
+          <button className="btn btn-success form-control" type="submit">
+            Axtar
+          </button>
+        </div>
+      </div>
     </Form>
   );
 };
