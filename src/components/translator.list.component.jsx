@@ -7,7 +7,7 @@ import translatorList from "../assets/translatorList";
 
 const TranslatorList = ({ data, soorahTitle }) => {
   return (
-    <Nav justify variant="tabs" defaultActiveKey="/home">
+    <Nav justify variant="pills fill" defaultActiveKey="/home">
       <Nav.Item>
         <Link to={`/${data.s}/?t=${data.t}`} className="nav-link active">
           {soorahTitle}

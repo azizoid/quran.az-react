@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 import SoorahAyah from "../components/soorah.ayah.component";
-import TranslatorList from "../components/translator.list.component";
 import TitleComponent from "../components/title.component";
 
 import Loading from "../components/loader.component";
 
 const Soorah = ({ soorah, t, soorahTitle }) => {
-  const [data, setData] = useState([]);
   const [out, setOut] = useState([]);
 
   /*
@@ -23,7 +21,6 @@ const Soorah = ({ soorah, t, soorahTitle }) => {
       .then(({ out, data }) => {
         if (out.length > 0) {
           setOut(out);
-          setData(data);
           setEmpty(2);
         } else setEmpty(1);
       });
@@ -38,32 +35,19 @@ const Soorah = ({ soorah, t, soorahTitle }) => {
   } else if (empty === 0) return <Loading />;
 
   return (
-    <div className="row">
+    <>
       <TitleComponent title={`${soorahTitle}`} />
-      <table id="quran" className="table table-striped table-borderless">
-        <thead>
-          <tr>
-            <td colSpan="3">
-              <TranslatorList data={data} soorahTitle={soorahTitle} />
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          {soorah !== 9 && (
-            <tr>
-              <td>&nbsp;</td>
-              <td>
-                <h3 className="text-center">&#65021;</h3>
-              </td>
-              <td>&nbsp;</td>
-            </tr>
-          )}
-          {out.map((ayah) => (
-            <SoorahAyah ayah={ayah} key={ayah.id} />
-          ))}
-        </tbody>
-      </table>
-    </div>
+      <ul className="list-group list-group-flush">
+        {soorah !== 9 && (
+          <li className="list-group-item">
+            <h3 className="text-center">&#65021;</h3>
+          </li>
+        )}
+        {out.map((ayah) => (
+          <SoorahAyah ayah={ayah} key={ayah.id} />
+        ))}
+      </ul>
+    </>
   );
 };
 

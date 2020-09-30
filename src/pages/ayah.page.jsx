@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import TranslatorList from "../components/translator.list.component";
 import ColoredText from "../components/colored.text.component";
 
 import TitleComponent from "../components/title.component";
@@ -59,125 +58,100 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
   }
 
   return (
-    <div className="row">
-      <table id="quran-ayah" className="table table-borderless">
-        <thead>
-          <tr>
-            <td colSpan="3">
-              <TranslatorList
-                data={data}
-                soorahTitle={soorahTitle}
-                navClick={navClick}
-              />
-            </td>
-          </tr>
-          {soorah !== 1 && ayah !== 1 && (
-            <tr>
-              <td colSpan="3">
-                <h3 className="text-center">&#65021;</h3>
-              </td>
-            </tr>
-          )}
-        </thead>
-
-        {out.map(({ id, s, a, c, arabic, transliteration, prev, next }) => {
-          return (
-            <tbody key={id}>
-              <tr>
-                <td width="1" className="nav-icon align-middle">
-                  {prev !== null && (
+    <>
+      <ul className="list-group list-group-flush ">
+        {soorah !== 9 && (
+          <li className="list-group-item">
+            <h3 className="text-center">&#65021;</h3>
+          </li>
+        )}
+        {out.map(({ id, s, a, c, arabic, transliteration, prev, next }) => (
+          <>
+            <li className="list-group-item text-top list-group-item-action d-flex w-100 justify-content-between ">
+              {prev !== null && (
+                <a
+                  onClick={(e) => navClick(e, data.s, prev, data.t)}
+                  href={`/${data.s}/${prev}?t=${data.t}`}
+                  style={{
+                    fontSize: "3em",
+                    color: "#6cb2eb",
+                  }}
+                >
+                  <FaChevronLeft />
+                </a>
+              )}
+              <div>
+                <strong>{`${s}:${a}`}</strong>
+                <br />
+                {c}
+              </div>
+              {next !== null && (
+                <a
+                  onClick={(e) => navClick(e, data.s, next, data.t)}
+                  href={`/${data.s}/${next}?t=${data.t}`}
+                  style={{
+                    fontSize: "3em",
+                    color: "#6cb2eb",
+                  }}
+                >
+                  <FaChevronRight />
+                </a>
+              )}
+            </li>
+            <li
+              className="list-group-item list-group-item-action align-middle"
+              style={{ padding: "2rem" }}
+            >
+              <ColoredText key="transliteration" content={transliteration} />
+            </li>
+            <li
+              className="list-group-item list-group-item-action"
+              style={{ padding: "2rem" }}
+            >
+              <h2 className="text-right  align-text-top arabic">{arabic}</h2>
+            </li>
+            <li className="list-group-item ">
+              <ul className="pagination justify-content-center">
+                <li className="page-item">
+                  <Link to={`/${data.s}?t=${data.t}`} className="page-link">
+                    Surəni tam oxu
+                  </Link>
+                </li>
+                {prev !== null && (
+                  <li className="page-item">
                     <a
                       onClick={(e) => navClick(e, data.s, prev, data.t)}
                       href={`/${data.s}/${prev}?t=${data.t}`}
-                      style={{
-                        fontSize: "3em",
-                        color: "#6cb2eb",
-                      }}
+                      className="page-link"
                     >
-                      <FaChevronLeft />
+                      {prev}
                     </a>
-                  )}
-                </td>
-                <td style={{ textAlign: "justify" }}>
-                  <strong>{`${s}:${a}`}</strong>
-                  <br />
-                  {(description = c)}
-                </td>
-                <td width="1" className="nav-icon align-middle">
-                  {next !== null && (
+                  </li>
+                )}
+                <li className="page-item disabled">
+                  <span className="page-link">{data.a}</span>
+                </li>
+                {next !== null && (
+                  <li className="page-item">
                     <a
                       onClick={(e) => navClick(e, data.s, next, data.t)}
                       href={`/${data.s}/${next}?t=${data.t}`}
-                      style={{
-                        fontSize: "3em",
-                        color: "#6cb2eb",
-                      }}
+                      className="page-link"
                     >
-                      <FaChevronRight />
+                      {next}
                     </a>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <ColoredText
-                    key="transliteration"
-                    content={transliteration}
-                  />
-                </td>
-                <td></td>
-              </tr>
-              <tr>
-                <td colSpan="3">
-                  <h2 className="text-right arabic">{arabic}</h2>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan="3">
-                  <ul className="pagination justify-content-center">
-                    <li className="page-item">
-                      <Link to={`/${data.s}?t=${data.t}`} className="page-link">
-                        Surəni tam oxu
-                      </Link>
-                    </li>
-                    {prev !== null && (
-                      <li className="page-item">
-                        <a
-                          onClick={(e) => navClick(e, data.s, prev, data.t)}
-                          href={`/${data.s}/${prev}?t=${data.t}`}
-                          className="page-link"
-                        >
-                          {prev}
-                        </a>
-                      </li>
-                    )}
-                    <li className="page-item disabled">
-                      <span className="page-link">{data.a}</span>
-                    </li>
-                    {next !== null && (
-                      <li className="page-item">
-                        <a
-                          onClick={(e) => navClick(e, data.s, next, data.t)}
-                          href={`/${data.s}/${next}?t=${data.t}`}
-                          className="page-link"
-                        >
-                          {next}
-                        </a>
-                      </li>
-                    )}
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
+                  </li>
+                )}
+              </ul>
+            </li>
+          </>
+        ))}
+      </ul>
       <TitleComponent
         title={`${soorahTitle}:${ayah}`}
         description={description}
       />
-    </div>
+    </>
   );
 };
 

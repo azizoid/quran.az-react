@@ -5,23 +5,25 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import Highlighter from "react-highlight-words";
 
 const SearchAyah = ({ ayah, mark }) => {
-    return (
-        <tr>
-            <td className="text-right">{ayah.s + ":" + ayah.a}</td>
-            <td>
-                <Highlighter
-                    searchWords={[mark]}
-                    textToHighlight={ayah.c}
-                    autoEscape={true}
-                />
-            </td>
-            <td>
-                <Link to={`/${ayah.s}/${ayah.a}?t=${ayah.t}`}>
-                    <FaExternalLinkAlt />
-                </Link>
-            </td>
-        </tr>
-    );
+  return (
+    <li className="list-group-item text-top list-group-item-action d-flex w-100 justify-content-between">
+      <div className="text-left">
+        <span className="badge badge-primary badge-pill">
+          {ayah.s + ":" + ayah.a}
+        </span>{" "}
+        <Highlighter
+          searchWords={[mark]}
+          textToHighlight={ayah.c}
+          autoEscape={true}
+        />
+      </div>
+      <div>
+        <Link to={`/${ayah.s}/${ayah.a}?t=${ayah.t}`}>
+          <FaExternalLinkAlt />
+        </Link>
+      </div>
+    </li>
+  );
 };
 
 export default SearchAyah;

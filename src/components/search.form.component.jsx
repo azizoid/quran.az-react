@@ -48,12 +48,12 @@ const SearchForm = ({ onSubmit, formData = {} }) => {
   return (
     <Form
       id="search"
-      className="card card-header col-12"
+      className="card card-header"
       acceptCharset="UTF-8"
       onSubmit={onSearch}
     >
       <div className="form-group row">
-        <div class="input-group-prepend col-4">
+        <div className="input-group-prepend col-4">
           <Form.Control
             as="select"
             className="form-control"
@@ -67,7 +67,7 @@ const SearchForm = ({ onSubmit, formData = {} }) => {
             ))}
           </Form.Control>
         </div>
-        <div class="input-group col-3">
+        <div className="input-group col-3">
           <Form.Control
             type="number"
             placeholder="Ayə"
@@ -81,7 +81,7 @@ const SearchForm = ({ onSubmit, formData = {} }) => {
             onChange={(e) => onAyahChange(e.target.value)}
           />
         </div>
-        <div class="input-group-prepend col-5">
+        <div className="input-group-prepend col-5">
           <Form.Control
             as="select"
             className="form-control"
@@ -99,7 +99,7 @@ const SearchForm = ({ onSubmit, formData = {} }) => {
       </div>
 
       <div className="form-group row">
-        <div class="input-group-prepend col-7">
+        <div className="input-group-prepend col-7">
           <Form.Control
             type="text"
             placeholder="Kəlmə"
@@ -108,7 +108,7 @@ const SearchForm = ({ onSubmit, formData = {} }) => {
             onChange={(e) => onQueryChange(e.target.value)}
           />
         </div>
-        <div class="input-group-append col-5">
+        <div className="input-group-append col-5">
           <button className="btn btn-success form-control" type="submit">
             Axtar
           </button>
