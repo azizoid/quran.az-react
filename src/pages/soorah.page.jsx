@@ -4,6 +4,8 @@ import SoorahAyah from "../components/soorah.ayah.component";
 import TranslatorList from "../components/translator.list.component";
 import TitleComponent from "../components/title.component";
 
+import Loading from "../components/loader.component";
+
 const Soorah = ({ soorah, t, soorahTitle }) => {
   const [data, setData] = useState([]);
   const [out, setOut] = useState([]);
@@ -33,7 +35,7 @@ const Soorah = ({ soorah, t, soorahTitle }) => {
         <div className="col-sm-12 alert alert-danger">Surə tapılmamışdır</div>
       </div>
     );
-  }
+  } else if (empty === 0) return <Loading />;
 
   return (
     <div className="row">

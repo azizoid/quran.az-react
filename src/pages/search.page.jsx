@@ -4,6 +4,7 @@ import SearchAyah from "../components/search.ayah.component";
 import Pagination from "react-js-pagination";
 
 import TitleComponent from "../components/title.component";
+import Loading from "../components/loader.component";
 
 const Search = ({ query, t }) => {
   const [paginate, setPaginate] = useState([]);
@@ -41,7 +42,7 @@ const Search = ({ query, t }) => {
         <div className="col-sm-12 alert alert-danger">Kəlmə tapılmamışdır</div>
       </div>
     );
-  }
+  } else if (empty === 0) return <Loading />;
 
   return (
     <div className="row">
