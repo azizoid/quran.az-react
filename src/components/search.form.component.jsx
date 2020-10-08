@@ -1,52 +1,65 @@
-import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import React, { useRef } from "react";
 
 import translatorList from "../assets/translatorList.js";
 import soorahList from "../assets/soorahList.js";
 
 const DEFAULT_TRANSLATOR = process.env.REACT_APP_DEFAULT_TRANSLATOR;
 
-const SearchForm = ({ onSubmit, formData = {} }) => {
-  const [form, setForm] = useState({
-    s: 0,
-    a: "",
-    t: DEFAULT_TRANSLATOR,
-    q: "",
-    view: "empty",
-    ...formData,
-  });
+const SearchForm = ({
+  onSubmit,
+  form = { s: 0, a: "", t: DEFAULT_TRANSLATOR, q: "" },
+}) => {
+  const soorahRef = useRef(form.s);
+  const ayahRef = useRef(form.a);
+  const translatorRef = useRef(form.t);
+  const queryRef = useRef(form.q);
+  const viewRef = useRef("empty");
 
-  const onSoorahChange = (soorah) => {
-    setForm((prev) => {
-      return { ...prev, s: soorah, a: "", q: "", view: "soorah" };
-    });
-  };
-
-  const onAyahChange = (ayah) => {
-    setForm((prev) => {
-      return { ...prev, a: ayah, view: "ayah" };
-    });
-  };
-
-  const onTranslatorChange = (translator) => {
-    setForm((prev) => {
-      return { ...prev, t: parseInt(translator) };
-    });
-  };
-
-  const onQueryChange = (query) => {
-    setForm((prev) => {
-      return { ...prev, q: query, s: 0, a: "", view: "search" };
-    });
+  const onHandleChange = (event) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case "soorah":
+        soorahRef.current.value = value;
+        ayahRef.current.value = null;
+        queryRef.current.value = "";
+        viewRef.current = name;
+        break;
+      case "ayah":
+        ayahRef.current.value = value;
+        queryRef.current.value = "";
+        viewRef.current = name;
+        break;
+      case "query":
+        if (value.length > 3) {
+          soorahRef.current.value = 0;
+          ayahRef.current.value = "";
+          queryRef.current.value = value;
+          viewRef.current = name;
+        }
+        break;
+      case "translator":
+        translatorRef.current.value = value;
+        break;
+      default:
+    }
   };
 
   const onSearch = (event) => {
     event.preventDefault();
+
+    const form = {
+      s: soorahRef.current.value,
+      a: ayahRef.current.value,
+      t: translatorRef.current.value,
+      q: queryRef.current.value,
+      view: viewRef.current,
+    };
+
     onSubmit(form);
   };
 
   return (
-    <Form
+    <form
       id="search"
       className="card card-header"
       acceptCharset="UTF-8"
@@ -54,21 +67,22 @@ const SearchForm = ({ onSubmit, formData = {} }) => {
     >
       <div className="form-group row">
         <div className="input-group-prepend col-4">
-          <Form.Control
-            as="select"
+          <select
             className="form-control"
-            value={form.s}
-            onChange={(e) => onSoorahChange(e.target.value)}
+            name="soorah"
+            defaultValue={form.s}
+            onChange={onHandleChange}
+            ref={soorahRef}
           >
             {soorahList.map((soorah, index) => (
               <option value={index} key={index}>
                 {soorah}
               </option>
             ))}
-          </Form.Control>
+          </select>
         </div>
         <div className="input-group col-3">
-          <Form.Control
+          <input
             type="number"
             placeholder="Ayə"
             className="form-control "
@@ -76,36 +90,39 @@ const SearchForm = ({ onSubmit, formData = {} }) => {
             maxLength={3}
             min={1}
             max={286}
-            step={1}
-            value={form.a}
-            onChange={(e) => onAyahChange(e.target.value)}
+            name="ayah"
+            defaultValue={form.a}
+            onChange={onHandleChange}
+            ref={ayahRef}
           />
         </div>
         <div className="input-group-prepend col-5">
-          <Form.Control
-            as="select"
+          <select
             className="form-control"
-            id="t"
-            value={form.t}
-            onChange={(e) => onTranslatorChange(e.target.value)}
+            name="translator"
+            defaultValue={form.t}
+            onChange={onHandleChange}
+            ref={translatorRef}
           >
             {translatorList.map((t, index) => (
               <option value={index} key={index}>
                 {t}
               </option>
             ))}
-          </Form.Control>
+          </select>
         </div>
       </div>
 
       <div className="form-group row">
         <div className="input-group-prepend col-7">
-          <Form.Control
+          <input
             type="text"
             placeholder="Kəlmə"
             className="form-control"
-            value={form.q}
-            onChange={(e) => onQueryChange(e.target.value)}
+            name="query"
+            defaultValue={form.q}
+            onChange={onHandleChange}
+            ref={queryRef}
           />
         </div>
         <div className="input-group-append col-5">
@@ -114,7 +131,7 @@ const SearchForm = ({ onSubmit, formData = {} }) => {
           </button>
         </div>
       </div>
-    </Form>
+    </form>
   );
 };
 

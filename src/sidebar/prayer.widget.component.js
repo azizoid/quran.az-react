@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import getDayOfYear from "date-fns/getDayOfYear";
 
 const prayersListEmpty = [
@@ -12,22 +12,8 @@ const prayersListEmpty = [
 
 const PrayerWidget = () => {
   const [prayers, setPrayers] = useState(prayersListEmpty);
-  // const [tarix, setTarix] = useState();
   const [hijri, setHijri] = useState("");
   const dd = useRef(getDayOfYear(new Date()));
-
-  // const fetchDatas = useCallback(async () => {
-  //   await fetch("https://nam.az/api/1/" + dd.current)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const out = prayersListEmpty.map((prayer, i) => {
-  //         prayer["time"] = data["prayers"][i];
-  //         return prayer;
-  //       });
-  //       setHijri(data.hijri);
-  //       setPrayers(out);
-  //     });
-  // }, [prayersListEmpty]);
 
   useEffect(() => {
     async function fetchData() {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import SearchAyah from "../components/search.ayah.component";
 
 import Pagination from "react-js-pagination";
@@ -17,24 +17,26 @@ const Search = ({ query, t }) => {
     */
   const [empty, setEmpty] = useState(0);
 
-  const getData = (v) => {
-    fetch(`https://quran.az/api/search/${query}?page=${v}&t=${t}`)
-      .then((response) => response.json())
-      .then(({ out, paginate }) => {
-        if (out.length > 0) {
-          setOut(out);
-          setPaginate(paginate);
-          setEmpty(2);
-        } else setEmpty(1);
-      });
-  };
+  const getData = useCallback(
+    async (page) => {
+      await fetch(`https://quran.az/api/search/${query}?page=${page}&t=${t}`)
+        .then((response) => response.json())
+        .then(({ out, paginate }) => {
+          if (out.length > 0) {
+            setOut(out);
+            setPaginate(paginate);
+            setEmpty(2);
+          } else setEmpty(1);
+        });
+    },
+    [query, t]
+  );
 
   useEffect(() => {
     if (query.length > 2) {
       getData(1);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, t]);
+  }, [getData, query]);
 
   if (empty === 1) {
     return (

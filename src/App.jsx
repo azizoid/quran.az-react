@@ -1,16 +1,16 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 
 import Form from "./components/search.form.component";
-import Loader from "./components/loader.component";
 
 import soorahList from "./assets/soorahList.js";
-const DEFAULT_TRANSLATOR = process.env.REACT_APP_DEFAULT_TRANSLATOR;
 
-const Empty = lazy(() => import("./pages/empty.page"));
-const Soorah = lazy(() => import("./pages/soorah.page"));
-const Ayah = lazy(() => import("./pages/ayah.page"));
-const Search = lazy(() => import("./pages/search.page"));
+import Empty from "./pages/empty.page";
+import Soorah from "./pages/soorah.page";
+import Ayah from "./pages/ayah.page";
+import Search from "./pages/search.page";
+
+const DEFAULT_TRANSLATOR = process.env.REACT_APP_DEFAULT_TRANSLATOR;
 
 const App = () => {
   let paramQuery = new URLSearchParams(useLocation().search);
@@ -47,7 +47,7 @@ const App = () => {
   };
 
   const translator = () => {
-    let t = paramQuery.get("t") || DEFAULT_TRANSLATOR;
+    let t = paramQuery.get("t");
     if ([1, 2, 3, 4].indexOf(t) !== -1) t = DEFAULT_TRANSLATOR;
     return t;
   };
@@ -55,103 +55,99 @@ const App = () => {
   let t = translator();
 
   return (
-    <Suspense
-      fallback={
-        <>
-          <Form />
-          <Loader />
-        </>
-      }
-    >
-      <Switch>
-        <Route
-          exact={true}
-          path="/"
-          render={() => (
+    <Switch>
+      <Route
+        exact={true}
+        path="/"
+        render={() => (
+          <>
+            <Form onSubmit={onSearch} />
+            <br />
+            <Empty />
+          </>
+        )}
+      />
+      <Route
+        path="/search/:query"
+        render={(q) => {
+          const formData = {
+            s: 0,
+            a: "",
+            q: q.match.params.query,
+            t: translator(),
+          };
+          return (
             <>
-              <Form onSubmit={onSearch} />
+              <Form onSubmit={onSearch} form={formData} />
               <br />
-              <Empty />
+              <Search query={formData.q} t={formData.t} />
             </>
-          )}
-        />
-        <Route
-          path="/search/:query"
-          render={(q) => {
-            const formData = {
-              q: q.match.params.query,
-              t: translator(),
-            };
-            return (
-              <>
-                <Form onSubmit={onSearch} formData={formData} />
-                <br />
-                <Search query={formData.q} t={formData.t} />
-              </>
-            );
-          }}
-        />
-        <Route
-          exact={true}
-          strict={false}
-          path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])"
-          render={(q) => {
-            const formData = {
-              s: Number(q.match.params.soorah),
-              t: translator(),
-            };
-            return (
-              <>
-                <Form onSubmit={onSearch} formData={formData} />
-                <br />
-                <Soorah
-                  soorahTitle={soorahList[formData.s]}
-                  soorah={formData.s}
-                  t={formData.t}
-                />
-              </>
-            );
-          }}
-          key={Math.random()}
-        ></Route>
-        <Route
-          exact={false}
-          strict={false}
-          path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])/:ayah([1-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-7][0-9]|28[0-6])"
-          render={(q) => {
-            const formData = {
-              s: Number(q.match.params.soorah),
-              a: Number(q.match.params.ayah),
-              t: translator(),
-            };
-            return (
-              <>
-                <Form onSubmit={onSearch} formData={formData} />
-                <br />
-                <Ayah
-                  soorahTitle={soorahList[formData.s]}
-                  soorah={formData.s}
-                  ayah={formData.a}
-                  t={formData.t}
-                />
-              </>
-            );
-          }}
-          key={Math.random()}
-        />
-        <Route
-          path="*"
-          render={() => (
+          );
+        }}
+      />
+      <Route
+        exact={true}
+        strict={false}
+        path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])"
+        render={(q) => {
+          const formData = {
+            s: Number(q.match.params.soorah),
+            a: "",
+            q: "",
+            t: translator(),
+          };
+          return (
             <>
-              <Form onSubmit={onSearch} />
+              <Form onSubmit={onSearch} form={formData} />
               <br />
-              <Empty alert="danger" />
+              <Soorah
+                soorahTitle={soorahList[formData.s]}
+                soorah={formData.s}
+                t={formData.t}
+              />
             </>
-          )}
-          status={404}
-        />
-      </Switch>
-    </Suspense>
+          );
+        }}
+        key={Math.random()}
+      ></Route>
+      <Route
+        exact={false}
+        strict={false}
+        path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])/:ayah([1-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-7][0-9]|28[0-6])"
+        render={(q) => {
+          const formData = {
+            s: Number(q.match.params.soorah),
+            a: Number(q.match.params.ayah),
+            q: "",
+            t: translator(),
+          };
+          return (
+            <>
+              <Form onSubmit={onSearch} form={formData} />
+              <br />
+              <Ayah
+                soorahTitle={soorahList[formData.s]}
+                soorah={formData.s}
+                ayah={formData.a}
+                t={formData.t}
+              />
+            </>
+          );
+        }}
+        key={Math.random()}
+      />
+      <Route
+        path="*"
+        render={() => (
+          <>
+            <Form onSubmit={onSearch} />
+            <br />
+            <Empty alert="danger" />
+          </>
+        )}
+        status={404}
+      />
+    </Switch>
   );
 };
 

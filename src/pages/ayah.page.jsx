@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import ColoredText from "../components/colored.text.component";
 
 import TitleComponent from "../components/title.component";
 
-// import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import {
-  MdNavigateBefore as FaChevronLeft,
-  MdNavigateNext as FaChevronRight,
-} from "react-icons/md";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 
 const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
   let history = useHistory();
@@ -25,28 +21,33 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
     t: Number(t),
   });
 
+  const fetchData = useCallback(
+    async function fetchData() {
+      const url = `${form.s}/${form.a}?t=${form.t}`;
+      await fetch(`https://quran.az/api/` + url)
+        .then((response) => response.json())
+        .then(({ out, data }) => {
+          if (out.length > 0) {
+            localStorage.setItem("lastAyah", url);
+            setOut(out);
+            setData(data);
+            setEmpty(2);
+          } else setEmpty(1);
+        });
+    },
+    [form.s, form.a, form.t]
+  );
+
   useEffect(() => {
-    const url = `/${form.s}/${form.a}?t=${form.t}`;
+    fetchData();
+  }, [fetchData]);
 
-    fetch("https://quran.az/api" + url)
-      .then((response) => response.json())
-      .then(({ out, data }) => {
-        if (out.length > 0) {
-          setOut(out);
-          setData(data);
-          setEmpty(2);
-          localStorage.setItem("lastAyah", url);
-        } else setEmpty(1);
-      });
-  }, [form.s, form.a, form.t]);
-
-  const navClick = (e, s, a, tr) => {
+  const navClick = (event, s, a, tr) => {
+    event.preventDefault();
     setForm((prev) => {
       return { ...prev, s: Number(s), a: Number(a), t: Number(tr) };
     });
     history.push(`/${s}/${a}?t=${tr}`);
-
-    e.preventDefault();
   };
 
   let description = "";
@@ -66,7 +67,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
           </li>
         )}
         {out.map(({ id, s, a, c, arabic, transliteration, prev, next }) => (
-          <>
+          <Fragment key={id}>
             <li className="list-group-item text-top list-group-item-action d-flex w-100 justify-content-between ">
               {prev !== null && (
                 <a
@@ -77,7 +78,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                     color: "#6cb2eb",
                   }}
                 >
-                  <FaChevronLeft />
+                  <MdNavigateBefore />
                 </a>
               )}
               <div>
@@ -94,7 +95,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                     color: "#6cb2eb",
                   }}
                 >
-                  <FaChevronRight />
+                  <MdNavigateNext />
                 </a>
               )}
             </li>
@@ -144,7 +145,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                 )}
               </ul>
             </li>
-          </>
+          </Fragment>
         ))}
       </ul>
       <TitleComponent
