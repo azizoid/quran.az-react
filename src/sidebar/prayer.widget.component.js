@@ -1,32 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import getDayOfYear from "date-fns/getDayOfYear";
 
+const prayersListEmpty = [
+  { id: 1, title: "Fəcr", time: "--:--" },
+  { id: 2, title: "Günəş", time: "--:--" },
+  { id: 3, title: "Zöhr", time: "--:--" },
+  { id: 4, title: "Əsr", time: "--:--" },
+  { id: 5, title: "Məğrib", time: "--:--" },
+  { id: 6, title: "İşa", time: "--:--" },
+];
+
 const PrayerWidget = () => {
-  const [prayers, setPrayers] = useState([
-    { id: 1, title: "Fəcr", time: "--:--" },
-    { id: 2, title: "Günəş", time: "--:--" },
-    { id: 3, title: "Zöhr", time: "--:--" },
-    { id: 4, title: "Əsr", time: "--:--" },
-    { id: 5, title: "Məğrib", time: "--:--" },
-    { id: 6, title: "İşa", time: "--:--" },
-  ]);
+  const [prayers, setPrayers] = useState(prayersListEmpty);
   // const [tarix, setTarix] = useState();
-  const [hijri, setHijri] = useState();
-  const dd = getDayOfYear(new Date());
+  const [hijri, setHijri] = useState("");
+  const dd = useRef(getDayOfYear(new Date()));
+
+  // const fetchDatas = useCallback(async () => {
+  //   await fetch("https://nam.az/api/1/" + dd.current)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       const out = prayersListEmpty.map((prayer, i) => {
+  //         prayer["time"] = data["prayers"][i];
+  //         return prayer;
+  //       });
+  //       setHijri(data.hijri);
+  //       setPrayers(out);
+  //     });
+  // }, [prayersListEmpty]);
 
   useEffect(() => {
-    fetch("https://nam.az/api/1/" + dd)
-      .then((response) => response.json())
-      .then((data) => {
-        const out = prayers.map((prayer, i) => {
-          prayer["time"] = data["prayers"][i];
-          return prayer;
+    async function fetchData() {
+      await fetch("https://nam.az/api/1/" + dd.current)
+        .then((response) => response.json())
+        .then((data) => {
+          const out = prayersListEmpty.map((prayer, i) => {
+            prayer["time"] = data["prayers"][i];
+            return prayer;
+          });
+          setHijri(data.hijri);
+          setPrayers(out);
         });
-        setHijri(data.hijri);
-        setPrayers(out);
-      })
-      .catch();
-  }, [dd, prayers]);
+    }
+    fetchData();
+  }, []);
 
   return (
     <table className="table table-borderless table-sm">
