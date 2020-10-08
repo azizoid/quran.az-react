@@ -61,7 +61,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
   return (
     <>
       <ul className="list-group list-group-flush ">
-        {soorah !== 9 && (
+        {soorah !== 1 && ayah !== 1 && (
           <li className="list-group-item">
             <h3 className="text-center">&#65021;</h3>
           </li>
