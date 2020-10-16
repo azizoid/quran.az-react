@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 
-import Form from "./components/search.form.component";
+import Form from "./components/form.component";
 
 import soorahList from "./assets/soorahList.js";
 
