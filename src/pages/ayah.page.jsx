@@ -27,13 +27,13 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
       await fetch(`https://quran.az/api/` + url)
         .then((response) => response.json())
         .then(({ out, data }) => {
-          if (out.length > 0) {
+          if (out && out.length > 0) {
             localStorage.setItem("lastAyah", url);
             setOut(out);
             setData(data);
-            setEmpty(2);
           } else setEmpty(1);
-        });
+        })
+        .finally(() => setEmpty(2));
     },
     [form.s, form.a, form.t]
   );

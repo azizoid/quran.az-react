@@ -12,6 +12,11 @@ import Search from "./pages/search.page";
 
 const DEFAULT_TRANSLATOR = process.env.REACT_APP_DEFAULT_TRANSLATOR;
 
+const translator = (t = DEFAULT_TRANSLATOR) => {
+  if (!t || [1, 2, 3, 4].indexOf(t) !== -1) return DEFAULT_TRANSLATOR;
+  return t;
+};
+
 const App = () => {
   let paramQuery = new URLSearchParams(useLocation().search);
 
@@ -27,7 +32,8 @@ const App = () => {
       form.view = "search";
     } else form.view = "empty";
 
-    if ([1, 2, 3, 4].indexOf(t) !== -1) t = DEFAULT_TRANSLATOR;
+    // if ([1, 2, 3, 4].indexOf(t) !== -1) t = DEFAULT_TRANSLATOR;
+    t = translator(t);
 
     switch (form.view) {
       case "search":
@@ -46,13 +52,7 @@ const App = () => {
     }
   };
 
-  const translator = () => {
-    let t = paramQuery.get("t");
-    if ([1, 2, 3, 4].indexOf(t) !== -1) t = DEFAULT_TRANSLATOR;
-    return t;
-  };
-
-  let t = translator();
+  let t = translator(paramQuery.get("t"));
 
   return (
     <Switch>
@@ -74,7 +74,7 @@ const App = () => {
             s: 0,
             a: "",
             q: q.match.params.query,
-            t: translator(),
+            t: translator(paramQuery.get("t")),
           };
           return (
             <>
@@ -94,7 +94,7 @@ const App = () => {
             s: Number(q.match.params.soorah),
             a: "",
             q: "",
-            t: translator(),
+            t: translator(paramQuery.get("t")),
           };
           return (
             <>
@@ -119,7 +119,7 @@ const App = () => {
             s: Number(q.match.params.soorah),
             a: Number(q.match.params.ayah),
             q: "",
-            t: translator(),
+            t: translator(paramQuery.get("t")),
           };
           return (
             <>

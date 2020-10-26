@@ -25,9 +25,9 @@ const Search = ({ query, t }) => {
           if (out.length > 0) {
             setOut(out);
             setPaginate(paginate);
-            setEmpty(2);
           } else setEmpty(1);
-        });
+        })
+        .finally(() => setEmpty(2));
     },
     [query, t]
   );

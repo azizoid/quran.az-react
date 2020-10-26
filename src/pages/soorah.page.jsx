@@ -17,14 +17,16 @@ const Soorah = ({ soorah, t, soorahTitle }) => {
 
   useEffect(() => {
     async function fetchData() {
-      await fetch(`https://quran.az/api/${soorah}?t=${t}`)
+      const url = `https://quran.az/api/${soorah}?t=${t}`;
+
+      await fetch(url)
         .then((response) => response.json())
         .then(({ out, data }) => {
-          if (out.length > 0) {
+          if (out && out.length > 0) {
             setOut(out);
-            setEmpty(2);
           } else setEmpty(1);
-        });
+        })
+        .finally(() => setEmpty(2));
     }
     fetchData();
   }, [soorah, t]);
