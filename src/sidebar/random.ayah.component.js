@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import SOORAH_LIST from "../assets/soorahList";
 import Skeleton from "react-loading-skeleton";

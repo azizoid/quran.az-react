@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import { memo, useEffect, useState, useCallback } from "react";
 import SearchAyah from "../components/search.ayah.component";
 
 import Pagination from "react-js-pagination";
@@ -82,4 +82,4 @@ const Search = ({ query, t }) => {
   );
 };
 
-export default React.memo(Search);
+export default memo(Search);

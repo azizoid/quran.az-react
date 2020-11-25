@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 import translatorList from "../assets/translatorList.js";
 import soorahList from "../assets/soorahList.js";

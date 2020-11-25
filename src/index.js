@@ -1,4 +1,4 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -8,11 +8,11 @@ import "./styles/app.scss";
 // import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <Router>
       <App />
     </Router>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById("root")
 );
 

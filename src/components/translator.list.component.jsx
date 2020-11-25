@@ -1,4 +1,3 @@
-import React from "react";
 import { Nav, NavItem, NavLink, Dropdown } from "react-bootstrap";
 
 import { Link } from "react-router-dom";

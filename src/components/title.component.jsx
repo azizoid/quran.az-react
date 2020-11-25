@@ -1,4 +1,3 @@
-import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const TitleComponent = ({ title = "", description = "" }) => {

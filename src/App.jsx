@@ -1,4 +1,3 @@
-import React from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 
 import Form from "./components/form.component";

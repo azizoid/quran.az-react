@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useCallback } from "react";
+import { memo, Fragment, useEffect, useState, useCallback } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import ColoredText from "../components/colored.text.component";
@@ -156,4 +156,4 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
   );
 };
 
-export default React.memo(Ayah);
+export default memo(Ayah);

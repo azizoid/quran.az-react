@@ -1,5 +1,3 @@
-import React from "react";
-
 import FacebookProvider from "react-facebook/dist/FacebookProvider";
 import Page from "react-facebook/dist/Page";
 

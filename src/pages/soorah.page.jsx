@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import SoorahAyah from "../components/soorah.ayah.component";
 import TitleComponent from "../components/title.component";

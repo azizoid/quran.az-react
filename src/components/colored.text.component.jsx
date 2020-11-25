@@ -1,5 +1,3 @@
-import React from "react";
-
 const ColoredText = ({ content }) => {
   let colors = [
     "#3490dc",
