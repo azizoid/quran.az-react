@@ -68,7 +68,7 @@ const SearchForm = ({
       <div className="form-group row">
         <div className="input-group-prepend col-4">
           <select
-            className="form-control"
+            className="form-control btn-outline-success"
             name="soorah"
             defaultValue={form.s}
             onChange={onHandleChange}
@@ -85,7 +85,7 @@ const SearchForm = ({
           <input
             type="number"
             placeholder="Ayə"
-            className="form-control "
+            className="form-control"
             size={3}
             maxLength={3}
             min={1}
@@ -98,7 +98,7 @@ const SearchForm = ({
         </div>
         <div className="input-group-prepend col-5">
           <select
-            className="form-control"
+            className="form-control btn-outline-success"
             name="translator"
             defaultValue={form.t}
             onChange={onHandleChange}
